@@ -1,0 +1,44 @@
+<!--
+ * @Description: hash路由
+-->
+
+<!-- hash 基于location.hash实现，是指url中#后面的 -->
+<!-- 改变url的方式： 1.浏览器前进后退 2.a标签  3.通过window.location -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hash</title>
+</head>
+
+<body>
+  <ul>
+    <ul>
+      <li><a href="#/home">1111111111</a></li>
+      <li><a href="#/about">22222222</a></li>
+      <div id="routerView"></div>
+    </ul>
+  </ul>
+</body>
+<script>
+  let routerView = document.querySelector('#routerView') 
+  window.addEventListener('hashchange', () => { //hashchange 监听路由变化
+    let hash = location.hash;
+    console.log(routerView,"routerView");
+    routerView.innerHTML = hash
+  })
+  window.addEventListener('DOMContentLoaded', () => { //页面加载不会触发hashchange,用load事件来监听hash值，再将视图渲染成对应的内容
+    if (!location.hash) { //如果不存在hash值，那么重定向到#/
+      location.hash = "/"
+    } else { //如果存在hash值，那就渲染对应UI
+      let hash = location.hash;
+      console.log(routerView,"routerView");
+      routerView.innerHTML = hash
+    }
+  })
+</script>
+
+</html>
