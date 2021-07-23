@@ -1,20 +1,46 @@
 <!--
- * @Description: history路由
+ * 2021-07-21 16:00:17
+ * @create by: zj
+ * @Description: history 路由
 -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>history</title>
 </head>
+
 <body>
   <ul>
     <ul>
-      <li><a href="/home"></a></li>
-      <li><a href="/about"></a></li>
+      <li><a href="/home">1111111111</a></li>
+      <li><a href="/about">222222222</a></li>
+
+      <div id="routerView"></div>
     </ul>
   </ul>
 </body>
+<script>
+  const routerView = document.querySelector("#routerView")
+  window.addEventListener('DOMContentLoaded', onLoad)
+  window.addEventListener('popstate', () => {
+    routerView.innerHTML = location.pathname + "popstate"
+  })
+  console.log(window.history, "history");
+  // 需要拦截 <a> 标签点击事件默认行为， 点击时使用 pushState 修改 URL并更新手动 UI，从而实现点击链接更新 URL 和 UI 的效果。
+  function onLoad() {
+    routerView.innerHTML = "load"
+    let linkList = document.querySelectorAll('a[href]')
+    linkList.forEach(el => el.addEventListener('click', function (e) {
+      e.preventDefault()
+      console.log(el.getAttribute('href'),"el.getAttribute('href')");
+      window.history.pushState(null, null, el.getAttribute('href'))
+      routerView.innerHTML = location.pathname + 'aclick'
+    }))
+  }
+</script>
+
 </html>

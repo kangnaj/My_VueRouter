@@ -1,11 +1,17 @@
 /*
+ * 2021-07-06 17:07:30
+ * @create by: zj
+ * @Description: 
+ */
+/*
  * @Description: 
  */
 import Vue from 'vue'
-import VueRouter from 'vue-router'
+// import VueRouter from 'vue-router'
+import myVueRouter from './myVueRouter'
 import Home from '../views/Home.vue'
 
-Vue.use(VueRouter)
+Vue.use(myVueRouter)
 
 const routes = [
   {
@@ -20,7 +26,7 @@ const routes = [
   }
 ]
 
-const router = new VueRouter({
+const router = new myVueRouter({
   routes
 })
 
