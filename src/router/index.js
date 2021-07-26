@@ -27,6 +27,7 @@ const routes = [
 ]
 
 const router = new myVueRouter({
+  mode: "hash",
   routes
 })
 
