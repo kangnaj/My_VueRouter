@@ -9,10 +9,6 @@ let install = function (_Vue) {
     return
   }
   Vue = _Vue
-  applyMixin(Vue)
-}
-
-function applyMixin(Vue) {
   Vue.mixin({ // 全局混入 beforeCreate 钩子
     beforeCreate: vuexInit,
   })
