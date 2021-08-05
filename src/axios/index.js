@@ -24,16 +24,20 @@
 // axios基本使用方式主要有
 
 // axios(config)
-// axios.method(url, data , config)
+// axios.get(url, data , config)
 
+// axios本质是函数，赋值了一些别名方法，比如get、post方法，可被调用，最终调用的还是Axios.prototype.request函数。
+
+// var Axios = require('./core/Axios');
+// axios入口其实就是一个创建好的实例
 var axios = createInstance(defaults)
 
 function createInstance(defaultConfig) {
   // 实例化 Axios，
   var context = new Axios(defaultConfig);
+
   // 将 Axios.prototype.request 的执行上下文绑定到 context
   // bind 方法返回的是一个函数
-
   var instance = bind(Axios.prototype.request, context);
 
   // Copy axios.prototype to instance
@@ -44,9 +48,35 @@ function createInstance(defaultConfig) {
 
   // Copy context to instance
   // 将 context 继承给 instance
+   // 也就是为什么默认配置 axios.defaults 和拦截器  axios.interceptors 可以使用的原因
+  // 其实是new Axios().defaults 和 new Axios().interceptors
   utils.extend(instance, context);
 
   return instance;
 }
 
-axios.create()
+// Create the default instance to be exported
+// 导出 创建默认实例
+var axios = createInstance(defaults);
+// Expose Axios class to allow class inheritance
+// 暴露 Axios class 允许 class 继承 也就是可以 new axios.Axios()
+// 但  axios 文档中 并没有提到这个，我们平时也用得少。
+axios.Axios = Axios;
+
+// Factory for creating new instances
+// 工厂模式 创建新的实例 用户可以自定义一些参数
+axios.create = function create(instanceConfig) {
+  return createInstance(mergeConfig(axios.defaults, instanceConfig));
+};
+
+
+// 核心构造函数 Axios
+function Axios(instanceConfig) {
+  // 默认参数
+  this.defaults = instanceConfig;
+  // 拦截器 请求和响应拦截器
+  this.interceptors = {
+    request: new InterceptorManager(),
+    response: new InterceptorManager()
+  };
+}
