@@ -4,9 +4,9 @@ Axios 是一个基于 promise 的 HTTP 库，可以用在浏览器和 node.js �
 
 ## Axios功能
 
-- 从浏览器中创建 [XMLHttpRequests](https://link.juejin.cn/?target=https%3A%2F%2Fdeveloper.mozilla.org%2Fen-US%2Fdocs%2FWeb%2FAPI%2FXMLHttpRequest)
-- 从 node.js 创建 [http](https://link.juejin.cn/?target=http%3A%2F%2Fnodejs.org%2Fapi%2Fhttp.html) 请求
-- 支持 [Promise](https://link.juejin.cn/?target=https%3A%2F%2Fdeveloper.mozilla.org%2Fen-US%2Fdocs%2FWeb%2FJavaScript%2FReference%2FGlobal_Objects%2FPromise) API
+- 从浏览器中创建 XMLHttpRequests
+- 从 node.js 创建 http 请求
+- 支持 Promise API
 - 拦截请求和响应
 - 转换请求数据和响应数据
 - 取消请求

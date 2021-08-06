@@ -33,3 +33,10 @@ history提供了popState事件来监听
 
 ## Vue-router原理
 
+$router路由对象，$route当前路由信息对象
+
+Vue提供了插件注册机制是，每个插件都需要实现一个静态的 `install`方法，当执行 `Vue.use` 注册插件的时候，就会执行 `install` 方法
+
+Vue.mixin混入两个生命周期beforeCreate和destroyed
+
+**使用 Vue.util.defineReactive 将实例的 _route 设置为响应式对象**,**而 push, replace 方法会主动更新属性 _route**,**而 go，back，或者点击前进后退的按钮则会在 onhashchange 或者 onpopstate 的回调中更新 _route。_route 的更新会触发 RoterView 的重新渲染。**
